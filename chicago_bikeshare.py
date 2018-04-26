@@ -78,15 +78,48 @@ assert type(column_to_list(data_list, -2)) is list, "TASK 3: Wrong type returned
 assert len(column_to_list(data_list, -2)) == 1551505, "TASK 3: Wrong lenght returned."
 assert column_to_list(data_list, -2)[0] == "" and column_to_list(data_list, -2)[
     1] == "Male", "TASK 3: The list doesn't match."
+
+
 # -----------------------------------------------------
+
+def countElements(data, x):
+    """
+    Function count element in the list
+    Args:
+        :data list for count elements
+        :x element for count ins the data
+    Returns:
+        Count elements find in the data
+    """
+    count = 0
+    for ele in data:
+        if ele == x:
+            count += 1
+    return count
+
+
+def sumElements(data):
+    """
+    Function sum element in the list
+    Args:
+        :data list for sum elements
+        :x element for sum ins the data
+    Returns:
+        sum elements find in the data
+    """
+    sum = 0
+    for ele in data:
+        sum += ele
+    return sum
+
 
 input("Press Enter to continue...")
 # Now we know how to access the features, let's count how many Males and Females the dataset have
 # TASK 4
 # TODO: Count each gender. You should not use a function to do that.
 gender = column_to_list(data_list, 6)
-male = gender.count("Male")
-female = gender.count("Female")
+male = countElements(gender, "Male")
+female = countElements(gender, "Female")
 
 # Checking the result
 print("\nTASK 4: Printing how many males and females we found")
@@ -112,8 +145,8 @@ def count_gender(data_list):
             List with [count_male, counf_female] (e.g., [10, 15] means 10 Males, 15 Females)
     """
     gender = column_to_list(data_list, 6)
-    male = gender.count("Male")
-    female = gender.count("Female")
+    male = countElements(gender, "Male")
+    female = countElements(gender, "Female")
     return [male, female]
 
 
@@ -181,8 +214,8 @@ def count_user_types(data_list):
            Array with types user
     """
     user_types = column_to_list(data_list, 5)
-    customer = user_types.count("Customer")
-    subscriber = user_types.count("Subscriber")
+    customer = countElements(user_types, "Customer")
+    subscriber = countElements(user_types, "Subscriber")
     return [customer, subscriber]
 
 
@@ -206,6 +239,7 @@ print("\nTASK 8: Why the following condition is False?")
 print("male + female == len(data_list):", male + female == len(data_list))
 answer = False
 print("Answer:", answer)
+print("List also contains empty elements, then the sum of masculine and feminine, does not equal total list elements")
 
 # ------------ DO NOT CHANGE ANY CODE HERE ------------
 assert answer != "Type your answer here.", "TASK 8: Write your own answer!"
@@ -233,7 +267,7 @@ def median(list):
     if n % 2 == 1:
         return sorted(list)[n // 2]
     else:
-        return sum(sorted(list)[n // 2 - 1:n // 2 + 1]) / 2.0
+        return sumElements(sorted(list)[n // 2 - 1:n // 2 + 1]) / 2.0
 
 
 def minmax(list):
@@ -261,7 +295,7 @@ def mean(list):
        Returns:
            Number result calc mean of list
     """
-    return sum(map(int, list)) / len(list);
+    return sumElements(map(int, list)) / len(list);
 
 
 trip_duration_list = column_to_list(data_list, 2)
@@ -320,6 +354,7 @@ input("Press Enter to continue...")
 print("Will you face it?")
 answer = "yes"
 
+
 def count_items(column_list):
     """
     Analyze item and its respective count according to the reported column
@@ -332,7 +367,7 @@ def count_items(column_list):
     count_items = []
 
     for item in item_types:
-        count_items.append(column_list.count(item))
+        count_items.append(countElements(column_list, item))
 
     return item_types, count_items
 
